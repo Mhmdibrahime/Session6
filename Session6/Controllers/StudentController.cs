@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Session6.Models;
+using Session6.Models.ViewModels;
 
 namespace Session6.Controllers
 {
@@ -11,17 +12,26 @@ namespace Session6.Controllers
             return View();
         }
         [HttpPost]
-		public IActionResult AddStudent(string name,string phoneNumber)
+		public IActionResult AddStudent(StudentViewModel std)
 		{
-            var context = new AppDbContext();
-            var student = new Student
+            if(ModelState.IsValid)
             {
-                Name = name,
-                PhoneNumber = phoneNumber
-            };
-            context.Students.Add(student);
-            context.SaveChanges();
-            return RedirectToAction("Index","Home");
+                var context = new AppDbContext();
+                var student = new Student
+                {
+                    Name = std.Name,
+                    PhoneNumber = std.PhoneNumber
+
+                };
+                context.Students.Add(student);
+                context.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(std);
+            
+            
+
+           
 		}
 	}
 }

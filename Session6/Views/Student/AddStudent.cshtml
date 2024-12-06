@@ -1,11 +1,19 @@
-﻿
+﻿@model StudentViewModel
+
 @{
+
 }
+
 <form asp-action="AddStudent" asp-controller="Student" method="post">
    
-    <input type="text" name="name" placeholder="Enter Student Name"><br>
+
+    <input asp-for="Name" placeholder="Enter Student Name" value="Name"><br>
+    <span asp-validation-for="Name" class="text-danger"></span>
     
-    <input type="text" name="phonenumber" placeholder="Enter Student Number"><br>
+    
+    <input asp-for="PhoneNumber" placeholder="Enter Student Number"><br>
+    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+  
 
     <input type="submit" value="Submit">
 </form>
